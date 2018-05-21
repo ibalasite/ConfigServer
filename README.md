@@ -47,6 +47,6 @@ docker run -dti --name test4 -v ~/share:share evansking/redis
 ###  quick start
 
 ```
- ./configServer.js &
- ./configClient.js  
+node configServer.js &
+node configClient.js 
 ```
