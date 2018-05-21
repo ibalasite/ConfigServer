@@ -22,7 +22,12 @@ thrift --help
  npm install node-zookeeper-client
 
 ```
+### setting environment
 
+```
+thrift -r --gen js:node tutorial.thrift
+
+```
 ###  quick start
 
 ```
