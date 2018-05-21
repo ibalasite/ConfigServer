@@ -26,11 +26,25 @@ thrift --help
 
 ```
 thrift -r --gen js:node tutorial.thrift
+#create share folder
+mkdir ~/share
+#start zookeeper
+docker run --name zookeeper -p 2181:2181 -d evansking/zookeeper:0.1
+#setting zookeeper
+docker exec -it zookeeper zkCli.sh -server localhost
+#in zookeeper client
+[zk: localhost(CONNECTED) 0] create /RedisServer {"list":["test1","test2","test3","test4"]}
+[zk: localhost(CONNECTED) 1] quit
+#start 4 redis
+docker run -dti --name test1 -v ~/share:share evansking/redis
+docker run -dti --name test2 -v ~/share:share evansking/redis
+docker run -dti --name test3 -v ~/share:share evansking/redis
+docker run -dti --name test4 -v ~/share:share evansking/redis
 
 ```
 ###  quick start
 
 ```
  ./configServer.js &
- ./configClient.js &  
+ ./configClient.js  
 ```
