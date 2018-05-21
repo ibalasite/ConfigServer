@@ -4,8 +4,7 @@
 ### install thrift
 
 ```
-apt-get install libboost-dev libboost-test-dev libboost-program-options-dev libbb
-oost-system-dev libboost-filesystem-dev libevent-dev automake libtool flex bisonn
+apt-get install libboost-dev libboost-test-dev libboost-program-options-dev libbboost-system-dev libboost-filesystem-dev libevent-dev automake libtool flex bisonn
  pkg-config g++ libssl-dev
 curl http://archive.apache.org/dist/thrift/0.11.0/thrift-0.11.0.tar.gz | tar zx
 cd thrift-0.11.0/
