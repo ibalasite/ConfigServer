@@ -1,15 +1,30 @@
 console.log('pid in worker:', process.pid);
 
 process.on('message', function(msg) {
-  console.log('3:', msg);
+  try {
+    var aPaths;
+    if(Array.isArray(msg)){
+      aPaths=msg;
+    }else{
+      aPaths = JSON.parse(msg);
+    }
+    for (var i = 0, len = aPaths.length; i < len; i++) {
+        getConfig(client, aPaths[i]);
+    }
+   
+  } catch (e) {
+    console.log('3:', msg);
+    //console.log(e);
+  }
+
 });
 
 var i=0;
 
 var zookeeper = require('node-zookeeper-client');
 var client = zookeeper.createClient('zookeeper:2181');
-var paths = ['/RedisServer'];
- 
+var paths = ['/RedisServer','/DB'];
+let configs = {}; 
 
 
 function getConfig(client, path) {
@@ -17,16 +32,17 @@ function getConfig(client, path) {
         path,
         function (event) {
             console.log('Got event: %s', event);
-            for (var i = 0, len = paths.length; i < len; i++) { 
-                getConfig(client, paths[i]);
-            }
+            getConfig(client, path);
         },
         function (error, data, stat) {
             if (error) {
                 console.log('Error occurred when getting data: %s.', error);
                 return;
             }
-            process.send(data.toString('utf8'));
+            //JSON.stringify"
+            //console.log("path:"+path);
+            configs[path]=data.toString('utf8');
+            process.send(JSON.stringify(configs));
         }
     );
 }

@@ -18,7 +18,7 @@
  */
 
 # Thrift Tutorial
-# Mark Slee (ibalasite@gmail.com)
+# Evans Tseng (ibalasite@gmail.com)
 
 /**
  * The first thing to know about are types. The available types in Thrift are:
@@ -45,12 +45,8 @@ exception InvalidOperation {
   1: i32 type,
   2: string why
 }
-struct Config {
-  1: string path ,
-  2: string value,
-}
 service ConfigService {
-     set<Config> getConfig() throws (1:InvalidOperation ouch),
-     set<Config> getConfigByPath(1:set<string> paths) throws (1:InvalidOperation ouch)
+     string getConfig() throws (1:InvalidOperation ouch),
+     string flushConfig(1:set<string> paths) throws (1:InvalidOperation ouch)
 }
 

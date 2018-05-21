@@ -6,15 +6,15 @@ var childMessage="";
 //监听子进程事件
 worker.on('message', function(msg) {
   childMessage=msg;
-  console.log('1:', msg);//监听子进程zk数据，并将zk节点数据打印
+  console.log('1:', msg);
 })
+
 process.on('message', function(msg) {
   console.log('2:', msg);
 })
 
 worker.send('主进程给子进程传递的数据');
 
-//触发事件 message
 process.emit('message', '------');
 
 
@@ -27,9 +27,14 @@ var data = {};
 
 var server = thrift.createServer(ConfigService, {
   getConfig: function(result) {
-    result(null, childMessage);//将zk节点数据返回
+    
+    result(null, childMessage);
+  },
+  flushConfig: function(paths,result) {
+    worker.send(paths);
+    result(null, "1");
   }
 });
 
 server.listen(9090);
-
+	
