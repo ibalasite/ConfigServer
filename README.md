@@ -33,7 +33,10 @@ docker run --name zookeeper -p 2181:2181 -d evansking/zookeeper:0.1
 docker exec -it zookeeper zkCli.sh -server localhost
 #in zookeeper client
 [zk: localhost(CONNECTED) 0] create /RedisServer {"list":["test1","test2","test3","test4"]}
-[zk: localhost(CONNECTED) 1] quit
+[zk: localhost(CONNECTED) 1] create /DB {"user":"mysql_user","password":"{yourpwd}"}
+[zk: localhost(CONNECTED) 2] create /DB1 {"user":"mysql_user","password":"{yourpwd}"}
+[zk: localhost(CONNECTED) 3] create /DB2 {"user":"mysql_user","password":"{yourpwd}"}
+[zk: localhost(CONNECTED) 4] quit
 #start 4 redis
 docker run -dti --name test1 -v ~/share:share evansking/redis
 docker run -dti --name test2 -v ~/share:share evansking/redis
