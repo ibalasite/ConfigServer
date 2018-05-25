@@ -22,7 +22,7 @@ process.on('message', function(msg) {
 var i=0;
 
 var zookeeper = require('node-zookeeper-client');
-var client = zookeeper.createClient('zookeeper:2181');
+var client = zookeeper.createClient('zookeeper1:2181,zookeeper2:2181,zookeeper3:2181');
 var paths = ['/RedisServer','/DB'];
 let configs = {}; 
 
