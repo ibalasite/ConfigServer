@@ -23,7 +23,7 @@ var i=0;
 
 var zookeeper = require('node-zookeeper-client');
 var client = zookeeper.createClient('zookeeper1:2181,zookeeper2:2181,zookeeper3:2181');
-var paths = ['/RedisServer','/DB'];
+var paths = ['/RedisServer','/DB','/KafkaServer','/ZookeeperServer'];
 let configs = {}; 
 
 
